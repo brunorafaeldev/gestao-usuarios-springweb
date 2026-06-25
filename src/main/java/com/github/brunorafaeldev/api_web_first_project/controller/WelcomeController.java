@@ -15,7 +15,7 @@ public class WelcomeController {
     @GetMapping("/teste-users")
     @PreAuthorize("hasAnyRole('USERS', 'MANAGERS')")
     public String users() {
-        return "Authorized userr";
+        return "Authorized user";
     }
 
     public String managers() {
