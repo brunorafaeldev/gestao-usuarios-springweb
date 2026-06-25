@@ -26,7 +26,7 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
     @GetMapping("/users")
-    @PreAuthorize("hasAnyRole('USERS', 'MANAGERS')")
+   // @PreAuthorize("hasAnyRole('USERS', 'MANAGERS')") - Conflito com a classe SecurityConfig.java
     public List<Usuario> getUsers() {
         return repository.findAll();
 
@@ -34,15 +34,15 @@ public class UsuarioController {
 
     @GetMapping("/users/{username}")
     public Usuario getOneUsuario(@PathVariable("username") String username) {
-        return repository.findByUsername(username);
+        return repository.findByUsername(username).orElse(null);
     }
 
     // Obs. As requisições HTTP só realizam métodos Get, para realizar um delete ou
     // Post, precisamos de um Cliente HTTP. (Podemos usar o Postman)
 
     @DeleteMapping("/user/{id}")
-    public void deleteUser(@PathVariable("id") Integer id) {
-        repository.deletedById(id);
+    public void deleteUser(@PathVariable("id") Long id) {
+        repository.deleteById(id);
     }
 
     @PostMapping("/users")

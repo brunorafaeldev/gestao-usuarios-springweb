@@ -1,43 +1,57 @@
 package com.github.brunorafaeldev.api_web_first_project.model;
 
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "tab_users")
 public class Usuario {
 
-    private Integer Id;
-    private String login;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Column(nullable = false)
     private String password;
 
-    public Usuario() {}
-    public Usuario (String login, String password) {
-        this.login = login; 
-        this.password = password;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role_name")
+    private List<String> roles;
 
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario [login=" + login + ", password=" + password + "]";
+    public void setId(Long id) {
+        this.id = id;
     }
-    public Integer getId() {
-        return Id;
+
+    public String getUsername() {
+        return username;
     }
-    public void setId(Integer id) {
-        Id = id;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
-    }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    
-    
+    public List<String> getRoles() {
+        return roles;
+    }
 
-    
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
 }
