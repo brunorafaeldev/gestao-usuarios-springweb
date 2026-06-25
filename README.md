@@ -43,6 +43,28 @@ A segunda etapa do projeto foi implementada com sucesso, trazendo conceitos mode
 
 ---
 
+## 🗄️ Parte 3 - Configuração do Banco de Dados Concluída  (Banco H2)
+
+O banco de dados H2 está configurado para persistência automática em memória no ficheiro `src/main/resources/application.properties`:
+
+# Ativação do Console do H2
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:gestaodb
+spring.datasource.username=sa
+spring.datasource.password=
+
+---
+
+### Tabela de Permissões de Rotas:
+
+| Método | Endpoint | Permissão Necessária | Descrição |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/users` | Livre (`permitAll`) | Registo de novos utilizadores no banco |
+| `GET` | `/users` | `USERS` ou `MANAGERS` | Listagem de utilizadores registados |
+| `GET` | `/managers` | `MANAGERS` | Rota exclusiva para Administradores |
+| `GET` | `/teste-users` | `USERS` ou `MANAGERS` | Rota de teste para utilizadores autenticados |
+| `ANY` | `/h2-console/**` | Livre (`permitAll`) | Acesso liberado para consola do banco de dados |
+
 ## 🔧 Como Executar o Projeto
 
 1. Clone o repositório:
