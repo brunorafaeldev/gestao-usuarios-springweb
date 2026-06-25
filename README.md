@@ -17,7 +17,7 @@ O projeto está dividido em duas etapas fundamentais:
 * **Maven** 
 ---
 
-## 🛠️ Funcionalidades (Parte 1 - RESTful CRUD)
+## 🛠️ Parte 1 - API RESTful (CRUD)
 
 A API expõe endpoints para as seguintes operações de controle de usuários:
 
@@ -29,11 +29,17 @@ A API expõe endpoints para as seguintes operações de controle de usuários:
 
 ---
 
-## 🔒 Próximos Passos (Parte 2)
+## 🔒 Parte 2 - Segurança Concluída (Spring Security)
 
-A segunda etapa do projeto consistirá na implementação do **Spring Security**, onde serão adicionados:
-* Autenticação e Autorização de usuários.
-* Proteção dos endpoints do CRUD de acordo com o nível de permissão (Roles).
+A segunda etapa do projeto foi implementada com sucesso, trazendo conceitos modernos do **Spring Security 6.x (Spring Boot 3.x)**:
+
+* **Configuração Baseada em Componentes:** Substituição do antigo `WebSecurityConfigurerAdapter` pelo uso do `@Bean` de `SecurityFilterChain`.
+* **Controle de Acesso Centralizado:** Configuração de permissões de rotas usando `requestMatchers` e expressões Lambda (`->`) para um código mais limpo.
+* **Autenticação em Memória:** Criação de usuários simulados em memória (`InMemoryUserDetailsManager`) com diferentes níveis de acesso:
+  * `user` (Role: `USERS`) - Acesso a rotas comuns.
+  * `admin` (Role: `MANAGERS`) - Acesso a rotas administrativas e de gestão.
+* **Mapeamento de Rotas:** Resolução de conflitos de mapeamento ambíguo (`Ambiguous mapping`) garantindo a integridade dos endpoints do CRUD.
+* **Testes de API:** Utilização do **Postman** para validação de fluxos autenticados via *Basic Auth*, tratando retornos `401 Unauthorized` e `403 Forbidden`.
 
 ---
 
