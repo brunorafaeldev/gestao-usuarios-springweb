@@ -4,17 +4,30 @@ Este é um projeto prático desenvolvido durante o curso de JAVA DEVELOPER da [D
 
 O projeto está dividido em duas etapas fundamentais:
 1. **Parte 1 (Concluída):** Estrutura base da API, operações de CRUD e padrões RESTful.
-2. **Parte 2 (Em Desenvolvimento):** Implementação de controle de acesso e autenticação com Spring Security.
+2. **Parte 2 (Concluída):** Implementação de controle de acesso e autenticação com Spring Security.
+3. **Parte 3 (Concluída):** Implementação e configuração do Banco de Dados (em memória) usando o H2
+4. **Parte 4 (Concluída):** Autenticação JWT e Segurança com BCrypt
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-* **Java 21** 
-* **Spring Boot** 
-* **Spring Web** 
-* **Persistência:** Dados armazenados em memória (Simulação com Listas) para validação das regras de negócio.
-* **Maven** 
+* **Java 21**: Versão utilizada para o desenvolvimento da lógica central da aplicação.
+* **Spring Boot 3**: Framework base para acelerar o desenvolvimento da API.
+* **Spring Security**: Camada robusta para controle de autenticação e autorização (RBAC).
+* **Spring Web**: Mapeamento de endpoints RESTful e gerenciamento de requisições HTTP.
+* **Spring Data JPA**: Abstração da camada de persistência e comunicação com o banco de dados.
+* **Java-JWT (Auth0)**: Biblioteca utilizada para geração, assinatura e validação dos tokens JWT.
+* **Banco de Dados H2**: Banco de dados relacional em memória, configurado para agilizar os testes e validação das regras de negócio.
+* **Maven**: Gerenciador de dependências e automação do build do projeto.
+
+## 🔒 Estrutura de Permissões (Roles)
+
+A API conta com um controle de acesso baseado em papéis (Role-Based Access Control):
+
+* **`ROLE_USERS`**: Permissão para acessar rotas básicas de usuários e endpoints de teste (`/teste-users`).
+* **`ROLE_MANAGERS`**: Permissão total, incluindo acesso a painéis gerenciais (`/managers`) e listagem completa de dados.
+
 ---
 
 ## 🛠️ Parte 1 - API RESTful (CRUD)
@@ -29,7 +42,7 @@ A API expõe endpoints para as seguintes operações de controle de usuários:
 
 ---
 
-## 🔒 Parte 2 - Segurança Concluída (Spring Security)
+## 🔒 Parte 2 - Segurança (Spring Security)
 
 A segunda etapa do projeto foi implementada com sucesso, trazendo conceitos modernos do **Spring Security 6.x (Spring Boot 3.x)**:
 
@@ -43,7 +56,7 @@ A segunda etapa do projeto foi implementada com sucesso, trazendo conceitos mode
 
 ---
 
-## 🗄️ Parte 3 - Configuração do Banco de Dados Concluída  (Banco H2)
+## 🗄️ Parte 3 - Configuração do Banco de Dados (Banco H2)
 
 O banco de dados H2 está configurado para persistência automática em memória no ficheiro `src/main/resources/application.properties`:
 
@@ -55,7 +68,7 @@ spring.datasource.password=
 
 ---
 
-## 🎯 Parte 4: Autenticação JWT e Segurança com BCrypt
+## 🎯 Parte 4 - Autenticação JWT e Segurança com BCrypt
 
 Nesta última etapa, foi implementada a camada de segurança da API utilizando  **JWT (JSON Web Token)**.
 
