@@ -3,13 +3,15 @@ package com.github.brunorafaeldev.api_web_first_project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.brunorafaeldev.api_web_first_project.model.Usuario;
@@ -26,7 +28,8 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
     @GetMapping("/users")
-   // @PreAuthorize("hasAnyRole('USERS', 'MANAGERS')") - Conflito com a classe SecurityConfig.java
+    // @PreAuthorize("hasAnyRole('USERS', 'MANAGERS')") - Conflito com a classe
+    // SecurityConfig.java
     public List<Usuario> getUsers() {
         return repository.findAll();
 
@@ -45,14 +48,23 @@ public class UsuarioController {
         repository.deleteById(id);
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/users")
     public void postUser(@RequestBody Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         repository.save(usuario);
     }
 
     @PutMapping
     public void putuser(@RequestBody Usuario usuario) {
-        repository.save(usuario);
-    }
+        if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
+            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
+        }
+
+        repository.save(usuario);
+
+    }
 }
