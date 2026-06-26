@@ -55,6 +55,17 @@ spring.datasource.password=
 
 ---
 
+## 🎯 Parte 4: Autenticação JWT e Segurança com BCrypt
+
+Nesta última etapa, foi implementada a camada de segurança da API utilizando  **JWT (JSON Web Token)**.
+
+* **Criptografia de Senhas:** Integração do `BCryptPasswordEncoder` para encriptar as senhas dos usuários antes de salvá-las no banco de dados H2.
+* **Mapeamento de Rotas:** Configuração do `SecurityFilterChain` usando `AntPathRequestMatcher` para liberar rotas de autenticação (`/auth/**`) e proteger os endpoints de negócios por Roles (`USERS`, `MANAGERS`).
+* **Emissão de Tokens:** Criação do `TokenService` para gerar tokens JWT seguros após a validação correta das credenciais com `passwordEncoder.matches()`.
+* **Filtro Customizado:** Implementação do `SecurityFilter` interceptando as requisições para validar o cabeçalho `Authorization: Bearer <token>`.
+
+---
+
 ### Tabela de Permissões de Rotas:
 
 | Método | Endpoint | Permissão Necessária | Descrição |
